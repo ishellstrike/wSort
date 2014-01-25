@@ -10,6 +10,7 @@ namespace wSort
         private static string picDir = "Pictures";
         private static string gifDir = "Animations";
         private static string docDir = "Documents";
+        private static string arcDir = "Archives";
         static void Main(string[] args)
         {
             if (!Directory.Exists(picDir)) {
@@ -22,6 +23,10 @@ namespace wSort
             if (!Directory.Exists(docDir))
             {
                 Directory.CreateDirectory(docDir);
+            }
+            if (!Directory.Exists(arcDir))
+            {
+                Directory.CreateDirectory(arcDir);
             }
 
             foreach (var file in Directory.GetFiles(Directory.GetCurrentDirectory())) {
@@ -37,6 +42,16 @@ namespace wSort
 
                     case ".gif":
                         File.Move(file, gifDir + "\\"+ fi.Name);
+                        break;
+
+                    case ".zip":
+                    case ".gz":
+                    case ".tar":
+                    case ".bz2":
+                    case ".tgz":
+                    case ".rar":
+                    case ".7z":
+                        File.Move(file, arcDir + "\\" + fi.Name);
                         break;
 
                     case ".txt ":
